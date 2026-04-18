@@ -1,3 +1,4 @@
+# TEAM NAME : EAGLES
 # 📊 Advanced Sales Forecasting & Data Engineering Pipeline
 
 An end-to-end Machine Learning regression project designed to predict continuous numerical sales values. This system features a robust data engineering pipeline, comprehensive Exploratory Data Analysis (EDA), and automated hyperparameter tuning to ensure peak model performance.
