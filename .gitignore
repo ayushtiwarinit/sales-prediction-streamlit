@@ -1,0 +1,12 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Ignore large datasets
+data/raw/
+data/processed/
+data/junk/
+
+# Ignore large trained models
+models/*.pkl
