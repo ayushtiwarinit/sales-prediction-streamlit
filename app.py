@@ -45,19 +45,33 @@ item_choice = st.sidebar.selectbox("Select Product (Item)", item_options)
 st.title("📊 Integrated Sales Forecasting")
 
 # 1. Visualization of ALL Model Accuracy Graphs
+# 1. Visualization of ALL Model Accuracy Graphs
 with st.expander("Model Evaluation & Accuracy Metrics", expanded=True):
+    # Create the dataframe from the metrics JSON
     metrics_df = pd.DataFrame(metrics).T.reset_index().rename(columns={'index': 'Model'})
+    
+    # NEW: Calculate Accuracy Percentage from R2 Score
+    metrics_df['Accuracy (%)'] = (metrics_df['R2'] * 100).round(2).astype(str) + "%"
+    
+    # Reorder columns for better readability
+    metrics_df = metrics_df[['Model', 'Accuracy (%)', 'R2', 'RMSE', 'MAE']]
     
     col1, col2 = st.columns([1, 2])
     
     with col1:
         st.markdown("### Accuracy Scoreboard")
-        # Display a clean table showing all models
+        # Display the table with the new Accuracy Percentage column
         st.dataframe(metrics_df, hide_index=True, use_container_width=True)
         
     with col2:
         # Show the bar chart comparison
-        fig_acc = px.bar(metrics_df, x='Model', y=['R2', 'RMSE', 'MAE'], barmode='group', title="Metric Comparison across Models")
+        fig_acc = px.bar(
+            metrics_df, 
+            x='Model', 
+            y=['R2', 'RMSE', 'MAE'], 
+            barmode='group', 
+            title="Metric Comparison across Models"
+        )
         st.plotly_chart(fig_acc, use_container_width=True)
 
 st.markdown("---")
